@@ -17,6 +17,9 @@ devDependencies:
   eslint:
     specifier: ^8.46.0
     version: 8.46.0
+  eslint-plugin-rulesdir:
+    specifier: ^0.2.2
+    version: 0.2.2
   tsx:
     specifier: ^3.12.7
     version: 3.12.7
@@ -638,6 +641,11 @@ packages:
   /escape-string-regexp@4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
+    dev: true
+
+  /eslint-plugin-rulesdir@0.2.2:
+    resolution: {integrity: sha512-qhBtmrWgehAIQeMDJ+Q+PnOz1DWUZMPeVrI0wE9NZtnpIMFUfh3aPKFYt2saeMSemZRrvUtjWfYwepsC8X+mjQ==}
+    engines: {node: '>=4.0.0'}
     dev: true
 
   /eslint-scope@7.2.2:
