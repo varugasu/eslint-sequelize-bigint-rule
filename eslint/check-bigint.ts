@@ -75,6 +75,15 @@ module.exports = createRule({
                   context.report({
                     node: property.key,
                     messageId: "useBigInt",
+                    fix: (fixer) => {
+                      if (!property.typeAnnotation?.typeAnnotation.range)
+                        return null;
+
+                      return fixer.replaceTextRange(
+                        property.typeAnnotation?.typeAnnotation.range,
+                        "bigint"
+                      );
+                    },
                   });
                 }
               });
@@ -94,6 +103,7 @@ module.exports = createRule({
     },
     type: "suggestion",
     schema: [],
+    fixable: "code",
   },
   defaultOptions: [],
 });
