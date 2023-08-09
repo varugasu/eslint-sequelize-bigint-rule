@@ -14,6 +14,19 @@ function extendsSequelizeModel(expression: TSESTree.LeftHandSideExpression | nul
   return expression !== null && expression.type === TSESTree.AST_NODE_TYPES.Identifier && expression.name === "Model";
 }
 
+function containsDataTypeBigInt(obj: TSESTree.ObjectLiteralElement) {
+  return (
+    obj.type === TSESTree.AST_NODE_TYPES.Property &&
+    obj.key.type === TSESTree.AST_NODE_TYPES.Identifier &&
+    obj.key.name === "type" &&
+    obj.value.type === TSESTree.AST_NODE_TYPES.MemberExpression &&
+    obj.value.object.type === TSESTree.AST_NODE_TYPES.Identifier &&
+    obj.value.object.name === "DataType" &&
+    obj.value.property.type === TSESTree.AST_NODE_TYPES.Identifier &&
+    obj.value.property.name === "BIGINT"
+  );
+}
+
 module.exports = createRule({
   create(context) {
     return {
@@ -32,19 +45,7 @@ module.exports = createRule({
 
               argument.properties.forEach((argProperty) => {
                 // Ensures Column has an argument with "type: DataType.BIGINT"
-                if (
-                  !(
-                    argProperty.type === TSESTree.AST_NODE_TYPES.Property &&
-                    argProperty.key.type === TSESTree.AST_NODE_TYPES.Identifier &&
-                    argProperty.key.name === "type" &&
-                    argProperty.value.type === TSESTree.AST_NODE_TYPES.MemberExpression &&
-                    argProperty.value.object.type === TSESTree.AST_NODE_TYPES.Identifier &&
-                    argProperty.value.object.name === "DataType" &&
-                    argProperty.value.property.type === TSESTree.AST_NODE_TYPES.Identifier &&
-                    argProperty.value.property.name === "BIGINT"
-                  )
-                )
-                  return;
+                if (!containsDataTypeBigInt(argProperty)) return;
 
                 if (property.typeAnnotation?.typeAnnotation.type !== TSESTree.AST_NODE_TYPES.TSBigIntKeyword) {
                   context.report({
