@@ -10,17 +10,17 @@ function containsColumnDecorator(expression: TSESTree.LeftHandSideExpression): e
   );
 }
 
+function extendsSequelizeModel(expression: TSESTree.LeftHandSideExpression | null): expression is TSESTree.Identifier {
+  return expression !== null && expression.type === TSESTree.AST_NODE_TYPES.Identifier && expression.name === "Model";
+}
+
 module.exports = createRule({
   create(context) {
-    let modelNode: TSESTree.Identifier;
     return {
       ClassDeclaration(node) {
-        if (node.superClass?.type === TSESTree.AST_NODE_TYPES.Identifier) {
-          if (node.superClass.name === "Model") {
-            modelNode = node.superClass;
-          }
+        if (!extendsSequelizeModel(node.superClass)) {
+          return;
         }
-        if (!modelNode) return;
 
         node.body.body.forEach((property) => {
           if (property.type !== TSESTree.AST_NODE_TYPES.PropertyDefinition) return;
