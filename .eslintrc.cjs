@@ -1,12 +1,14 @@
+/* eslint-env node */
 const rulesDirPlugin = require("eslint-plugin-rulesdir");
-rulesDirPlugin.RULES_DIR = "eslint/";
+rulesDirPlugin.RULES_DIR = "dist/eslint/";
 
 module.exports = {
   env: {
     browser: true,
     es2021: true,
+    node: true,
   },
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  extends: [],
   overrides: [
     {
       env: {
@@ -30,5 +32,8 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["@typescript-eslint", "rulesdir"],
-  rules: {},
+  rules: {
+    "rulesdir/check-bigint": "error",
+  },
+  root: true,
 };
