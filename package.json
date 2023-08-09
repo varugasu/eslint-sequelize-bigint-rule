@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./eslint"
+    "test": "mocha ./eslint",
+    "watch": "tsc -w"
   },
   "keywords": [],
   "author": "",
