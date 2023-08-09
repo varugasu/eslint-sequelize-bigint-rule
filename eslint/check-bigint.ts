@@ -10,8 +10,15 @@ function containsColumnDecorator(expression: TSESTree.LeftHandSideExpression): e
   );
 }
 
-function extendsSequelizeModel(expression: TSESTree.LeftHandSideExpression | null): expression is TSESTree.Identifier {
-  return expression !== null && expression.type === TSESTree.AST_NODE_TYPES.Identifier && expression.name === "Model";
+function extendsSequelizeModel(
+  sequelizeModelName: string,
+  expression: TSESTree.LeftHandSideExpression | null
+): expression is TSESTree.Identifier {
+  return (
+    expression !== null &&
+    expression.type === TSESTree.AST_NODE_TYPES.Identifier &&
+    expression.name === sequelizeModelName
+  );
 }
 
 function containsDataTypeBigInt(obj: TSESTree.ObjectLiteralElement) {
@@ -29,9 +36,17 @@ function containsDataTypeBigInt(obj: TSESTree.ObjectLiteralElement) {
 
 module.exports = createRule({
   create(context) {
+    let sequelizeModelName = "Model";
     return {
+      ImportDeclaration(node) {
+        if (node.source.value !== "sequelize-typescript") return;
+        node.specifiers.forEach((specifier) => {
+          if (specifier.type !== TSESTree.AST_NODE_TYPES.ImportSpecifier) return;
+          specifier.imported.name === "Model" && (sequelizeModelName = specifier.local.name);
+        });
+      },
       ClassDeclaration(node) {
-        if (!extendsSequelizeModel(node.superClass)) {
+        if (!extendsSequelizeModel(sequelizeModelName, node.superClass)) {
           return;
         }
 
