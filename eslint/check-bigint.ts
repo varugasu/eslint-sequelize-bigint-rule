@@ -90,7 +90,7 @@ module.exports = createRule({
       description: "",
     },
     messages: {
-      useBigInt: "Use BigInt instead of number for bigint column",
+      useBigInt: "Use bigint instead of number for BigInt column",
     },
     type: "suggestion",
     schema: [],
