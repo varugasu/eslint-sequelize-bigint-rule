@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require @esbuild-kit/cjs-loader ./tests/*",
+    "test": "vitest",
     "watch": "tsc -w"
   },
   "keywords": [],
@@ -21,9 +21,9 @@
     "@typescript-eslint/utils": "^6.3.0",
     "eslint": "^8.46.0",
     "eslint-plugin-rulesdir": "^0.2.2",
-    "mocha": "^10.2.0",
     "tsx": "^3.12.7",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vitest": "^0.34.1"
   },
   "dependencies": {
     "reflect-metadata": "^0.1.13",
