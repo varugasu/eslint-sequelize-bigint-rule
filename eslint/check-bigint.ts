@@ -34,7 +34,7 @@ function containsDataTypeBigInt(obj: TSESTree.ObjectLiteralElement) {
   );
 }
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     let sequelizeModelName = "Model";
     return {
@@ -94,4 +94,4 @@ export const rule = createRule({
   defaultOptions: [],
 });
 
-module.exports = rule;
+export = rule;
