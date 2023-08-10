@@ -4,23 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./eslint",
+    "test": "mocha --require @esbuild-kit/cjs-loader ./tests/*",
     "watch": "tsc -w"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@esbuild-kit/cjs-loader": "^2.4.2",
     "@types/eslint": "^8.44.2",
     "@types/node": "^20.4.9",
     "@types/validator": "^13.11.1",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
+    "@typescript-eslint/rule-tester": "^6.3.0",
     "@typescript-eslint/utils": "^6.3.0",
     "eslint": "^8.46.0",
     "eslint-plugin-rulesdir": "^0.2.2",
     "mocha": "^10.2.0",
-    "ts-node": "^10.9.1",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
   },

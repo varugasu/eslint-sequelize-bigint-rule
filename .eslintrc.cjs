@@ -1,6 +1,7 @@
-/* eslint-env node */
+require("@esbuild-kit/cjs-loader");
+
 const rulesDirPlugin = require("eslint-plugin-rulesdir");
-rulesDirPlugin.RULES_DIR = "dist/eslint/";
+rulesDirPlugin.RULES_DIR = "eslint/";
 
 module.exports = {
   env: {
