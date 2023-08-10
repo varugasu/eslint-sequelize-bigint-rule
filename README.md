@@ -20,6 +20,7 @@ The following projects cover this later case:
 
 From all of them, `rulesdir` provided the best DX by being plug-n-play. Therefore, this POC uses `rulesdir`.
 
+
 ### Transpiling
 
 ESLint can only run a rule if it is a **Javascript file**. Therefore, we must transpile all rules before using them.
@@ -28,6 +29,8 @@ This can be done in two ways:
 
 * **Pre-transpiling**
 * **Transpiling on the fly**
+
+When writing a Javascript rule and using `rulesdir`, we must export the rule with `module.exports`. For Typescript-ESLint Custom Rules, we can use either `modules.exports = rule` or `export = rule`
 
 #### Pre-transpiling
 
