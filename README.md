@@ -63,3 +63,28 @@ require("@esbuild-kit/cjs-loader");
 const rulesDirPlugin = require("eslint-plugin-rulesdir");
 rulesDirPlugin.RULES_DIR = "eslint/";
 ```
+
+## Testing
+
+To use `RuleTester`, we must install:
+
+```bash
+pnpm add -D @typescript-eslint/rule-tester
+```
+
+Next, we need to setup the `.afterAll` hook ([Github Issue](https://github.com/typescript-eslint/typescript-eslint/issues/7275)).
+
+With **Vitest** this can be done with:
+
+```ts
+import * as vitest from 'vitest';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+
+RuleTester.afterAll = vitest.afterAll;
+// if you are not using vitest with globals: true
+RuleTester.it = vitest.it;
+RuleTester.itOnly = vitest.it.only;
+RuleTester.describe = vitest.describe;
+```
+
+See [`tests/check-bigint.test.ts`](https://github.com/vargasmesh/eslint-sequelize-bigint-rule/blob/main/tests/check-bigint.test.ts) for an example.
