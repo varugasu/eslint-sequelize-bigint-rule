@@ -1,4 +1,11 @@
-# Typescript-ESLint Custom Rules POC
+<div align="center">
+    <h1>If DataType is BIGINT, then type must be bigint</h1>
+    <img src="./docs/custom-rule.gif" width="100%"/>
+    <h3>A Proof Of Concept of ESLint Custom rules</h3>
+</div>
+
+<br />
+<br />
 
 ## Using Local Rules
 
